@@ -1,8 +1,8 @@
 package step.learning.oop;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.SQLOutput;
+import java.text.*;
+import java.util.*;
 public class Library {
 
     private List<Literature> funds;
@@ -16,14 +16,40 @@ public class Library {
     }
     public void printFunds(){
         for (Literature literature : funds){
-            literature.print();
+            if(literature instanceof Printable){
+                ((Printable)literature).print();
+            }
+            else{
+                System.out.println("Unprintable: " + literature.getTitle());
+            }
         }
     }
-    public void Run() {
+    public void printPeriodic(){
+        for(Literature literature : funds){
+            if(literature instanceof Periodic){
+                System.out.println("Printable: " + literature.getTitle());
+            }
+            else{
+               printNonPeriodic(literature);
+            }
+        }
+    }
+    public void printNonPeriodic(Literature literature){
+        System.out.println("Unprintable: " + literature.getTitle());
+    }
+    public void run() {
         add(new Book()
                 .setAuthor("Knuth")
                 .setTitle("Art of programming"));
         add(new Journal().setNumber(1).setTitle("Journal Part"));
+        try {
+            add(new Newspaper().setTitle("Planet").setDate("2022-10-10"));
+            add(new Newspaper().setTitle("Planet").setDate("2022-10-10"));
+            add(new Newspaper().setTitle("Planet").setDate("2022-10-10"));
+        } catch (ParseException ex){
+            System.out.println(ex.getMessage());
+        }
         printFunds();
+        printPeriodic();
     }
 }
