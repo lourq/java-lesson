@@ -1,5 +1,12 @@
 package step.learning.oop;
 
-public class Poster {
+import java.io.Serializable;
 
+public class Poster
+        extends Literature
+        implements Periodic, Serializable {
+    @Override
+    public Poster setTitle(String title) {
+        return (Poster) super.setTitle(title);
+    }
 }
