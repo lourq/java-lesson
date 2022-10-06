@@ -67,7 +67,7 @@ public class Library{
     }
     public void menu(){
         Scanner kbScanner = new Scanner(System.in);
-       String str = "";
+        String str = "";
         do {
             System.out.println("Make your select:\n"
             +"1)Show object with Printable interface\n"
