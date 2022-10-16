@@ -27,7 +27,7 @@ public class FileDemo {
             }
         }
         else
-            System.out.println("Invalid directory name");
+            System.out.println("Resource not found");
     }
     private void commandCat(String fileName){
         File file = new File(fileName);
@@ -46,7 +46,7 @@ public class FileDemo {
             }
         }
         else
-            System.out.println("Invalid file name");
+            System.out.println("Resource not found");
     }
 
     //region hw fileNav
@@ -62,7 +62,7 @@ public class FileDemo {
                 case "cd" -> commandCd(command.split(" ")[1]);
                 case "cat" -> commandCat(command.split(" ")[1]);
                 case "exit" -> System.out.println("exit");
-                default -> System.out.println("Err");
+                default -> System.out.println("Command unknown");
             }
         }while(!command.equals("exit"));
 
