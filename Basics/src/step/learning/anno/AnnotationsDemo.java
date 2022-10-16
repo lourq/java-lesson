@@ -1,14 +1,17 @@
 package step.learning.anno;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+
 
 public class AnnotationsDemo {
     @FieldAnnotation( value = "For all versions", priority = -1 )
     private String separator = "------------------------------------------------";
     @MethodAnnotation( "Entry Point" )
-    public void run() {
+    public void run() throws NoSuchMethodException {
         // Извлечь аннотацию - получить информацию о типе
         Class<?> type = ClassWithAnnotation.class ;  // по классу
         Class<?> thisType = this.getClass() ;        // по объекту
@@ -39,6 +42,8 @@ public class AnnotationsDemo {
             System.out.printf( "Class '%s' has MarkerAnnotation%n", nameType.getName() ) ;
         else
             System.out.printf( "Class '%s' has no MarkerAnnotation%n", nameType.getName() ) ;
+
+
         // endregion
         System.out.println( separator ) ;
 
@@ -99,6 +104,36 @@ public class AnnotationsDemo {
               объект и не будет создан)
           - если есть (ранее создан) - использовать его
          */
+
+        //region hw Annotation
+
+        ConstructorAnnotation constructorAnnotation = type.getAnnotation( ConstructorAnnotation.class ) ;
+        if( constructorAnnotation != null )
+            System.out.printf( "Class '%s' has ConstructorAnnotation%n", type.getName() ) ;
+        else
+            System.out.printf( "Class '%s' has no ConstructorAnnotation%n", type.getName() ) ;
+
+        Constructor<?>[] constructorArray = type.getDeclaredConstructors();
+
+        for (Constructor<?> constructorValue : constructorArray){
+            if(obj == null){
+                try { obj = type.getDeclaredConstructor().newInstance(); }
+                catch( Exception ex ) {
+                    System.out.println( "Instantiate error: " + ex.getMessage() ) ;
+                    return;
+                }
+            }
+            if(constructorValue.isAnnotationPresent(ConstructorAnnotation.class)){
+                    System.out.printf( "Field '%s' of  class '%s'",
+                    constructorValue.getName(), obj.getClass().getName());
+            }
+            else{
+                System.out.printf( "Field '%s' of  class '%s' has no annotation%n",
+                        constructorValue.getName(), type.getName() ) ;
+            }
+        }
+
+        //endregion
     }
 }
 /* Аннотации
