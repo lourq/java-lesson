@@ -1,10 +1,15 @@
 package step.learning.serial;
 
+import step.learning.anno.DemoClass;
+import step.learning.anno.EntryPoint;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@DemoClass
 public class SerializationDemo {
+    @EntryPoint
     public void run() {
          serializeList() ;
         // deserializeList() ;

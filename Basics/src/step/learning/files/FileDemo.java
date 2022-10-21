@@ -2,10 +2,14 @@ package step.learning.files;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Scanner;
 
+import step.learning.anno.DemoClass;
+import step.learning.anno.EntryPoint;
+
+@DemoClass
 public class FileDemo {
+    @EntryPoint
     public void run() {
         // fsDemo() ;
 //        ioDemo() ;

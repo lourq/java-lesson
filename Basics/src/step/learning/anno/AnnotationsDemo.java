@@ -6,11 +6,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
-
+@DemoClass
 public class AnnotationsDemo {
     @FieldAnnotation( value = "For all versions", priority = -1 )
     private String separator = "------------------------------------------------";
     @MethodAnnotation( "Entry Point" )
+    @EntryPoint
     public void run() throws NoSuchMethodException {
         // Извлечь аннотацию - получить информацию о типе
         Class<?> type = ClassWithAnnotation.class ;  // по классу

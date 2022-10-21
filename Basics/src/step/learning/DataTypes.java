@@ -1,7 +1,10 @@
 package step.learning;
-
+import step.learning.anno.DemoClass;
+import step.learning.anno.EntryPoint;
+@DemoClass(priority = 1)
 public class DataTypes {
-    public void Run() {
+    @EntryPoint
+    public void run() {
         System.out.println(ConsoleColors.BLUE + "Data types demo" + ConsoleColors.RESET );
 
         byte bx = -120;

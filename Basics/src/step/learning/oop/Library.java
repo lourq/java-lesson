@@ -1,10 +1,12 @@
 package step.learning.oop;
 
-import step.learning.serial.DataObject;
+import step.learning.anno.DemoClass;
+import step.learning.anno.EntryPoint;
 
 import java.io.*;
 import java.text.*;
 import java.util.*;
+@DemoClass
 public class Library{
 
     private List<Literature> funds;
@@ -82,6 +84,7 @@ public class Library{
             }
         }while (!str.equals("3"));
     }
+    @EntryPoint
     public void run() {
         add(new Book()
                 .setAuthor("Knuth")
