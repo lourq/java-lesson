@@ -2,12 +2,14 @@ package step.learning;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import step.learning.services.ConfigModule;
+
 
 public class Main {
     public static void main(String[] args) {
         // new App().run() ;
         // Контейнер - "модуль" внедрения зависимостей
-        Injector injector = Guice.createInjector() ;
+        Injector injector = Guice.createInjector( new ConfigModule() ) ;
         // Resolve - решение зависимостей и создание объекта
         App app = injector.getInstance( App.class ) ;
         app.run() ;
@@ -123,4 +125,11 @@ public class Main {
     - По умолчанию службы являются "Transient" - при новых обращениях создаются
         новые объекты. Альтернатива - @Singleton, при этом все запросы на иньекцию
         получат один и тот же объект
+ */
+/*
+    Настройка IoC
+    Под настройкой понимают связывание интерфейсов и их реализаций (классов),
+    а также типов (классов) и их объектов.
+    В Guice за настройку отвечает класс AbstractModule
+    Объект, расширяющий этот класс, передается в Guice.createInjector
  */

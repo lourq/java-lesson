@@ -1,8 +1,13 @@
 package step.learning;
 
 import javax.inject.Inject;
+
+import com.google.inject.name.Named;
 import step.learning.anno.DemoClass;
 import step.learning.anno.EntryPoint;
+import step.learning.services.RandomProvider;
+import step.learning.services.StringService;
+import step.learning.services.hash.HashService;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -15,14 +20,34 @@ import java.util.Scanner;
 public class App {
     @Inject  // ссылка на объект будет инициализирована контейнером (иньектором)
     private StringService stringService ;
-    @Inject private RandomProvider randomProvider ;
+    @Inject @Named("ten")
+    private final RandomProvider randomProvider ;
+    @Inject
+    public App(@Named("ten") RandomProvider randomProvider) {
+        // иньекция через конструктор лучше тем, что позволяет использовать final поля
+        this.randomProvider = randomProvider;
+    }
+
+    @Inject @Named("128")
+    private HashService hash128 ;
+    @Inject @Named("160")
+    private HashService hash160 ;
+
+    @Inject @Named("MsConnectionString")
+    private String msConnectionString ;
+    @Inject @Named("OracleConnectionString")
+    private String oracleConnectionString ;
 
     public void run() {
         System.out.println( "IoC Demo" ) ;
         System.out.println( "StringService: " + stringService.getString() ) ;
         System.out.println( "RandomProvider: " + randomProvider.getN() ) ;
-        System.out.println(stringService.getDate());
-        System.out.println(stringService.getTime());
+//        System.out.println(stringService.getDate());
+//        System.out.println(stringService.getTime());
+        System.out.println( "HashService (128bit): " + hash128.hash( "Hello" ) ) ;
+        System.out.println( "HashService (160bit): " + hash160.hash( "Hello" ) ) ;
+        System.out.println( "MsConnectionString: " + msConnectionString ) ;
+        System.out.println( "OracleConnectionString: " + oracleConnectionString ) ;
     }
 
     public void runMenu() {
